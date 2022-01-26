@@ -310,8 +310,8 @@
         "1": "Получить капельницу"
     }
     ,
-    "Aminimumof1Pearlrequiredfordeposits":{
-        "1": "Для депозита требуется минимум 1 жемчужина"
+    "Aminimumof1Splashrequiredfordeposits":{
+        "1": "Для внесения депозита требуется минимум 1 Splash."
     }
     ,
     "A10%taxischargedondeposits":{

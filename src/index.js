@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const Web3 = require("web3");
 const web3 = new Web3('https://api.avax-test.network/ext/bc/C/rpc');
-
 const Refreal = require("../schema/refrealSchema");
 const Transaction = require("../schema/transactionSchema");
 
@@ -12,7 +11,6 @@ exports.postRefreal = async (req, res) => {
             userRefral,
             ownerRefral
         } = req.body;
-        console.log("user Refral", userRefral);
         // create owner refral//
         if (!ownerRefral || ownerRefral == null || ownerRefral == undefined) {
             res.send({
@@ -101,16 +99,17 @@ exports.getRefreal = async (req, res) => {
 }
 exports.getTransaction = async (req, res) => {
     const hash = req.body.hash;
+    console.log("result.status", hash);
     try {
         let result = await web3.eth.getTransactionReceipt(hash);
-        console.log(result.status);
+        
         if (result.status) {
-            res.json({
+            res.send({
                 success: true,
                 result: result.status
             })
         } else {
-            res.json({
+            res.send({
                 success: true,
                 result: "Failed"
             })
@@ -155,5 +154,38 @@ exports.getTransactionDetail = async (req, res)=>{
 
     }catch(e){
         console.log("error while get transaction detail", e);
+    }
+}
+
+exports.postEvents = async (req, res) => {
+    try {
+        let {
+            hash,
+            toAddress,
+            fromAddress,
+            amount,
+            id
+        } = req.body;
+
+        let result = await web3.eth.getTransactionReceipt(hash);
+        if(result.status){
+        let transaction = await new Transaction()
+            transaction.toAddress = toAddress;
+            transaction.fromAddress = fromAddress;
+            transaction.id = id;
+            transaction.amount = amount;
+            await transaction.save();
+            res.send({
+                success: true,
+                result: result.status
+            })
+        }else{
+            res.send({
+                success: true,
+                result: result.status
+            })
+        }
+    } catch (e) {
+        console.log("error while save transactions", e);
     }
 }

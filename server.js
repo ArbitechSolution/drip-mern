@@ -6,6 +6,7 @@ let path = require("path");
 const connectDB = require("./connection/dbConnection")
 const userRoutes = require("./src/Routes")
 
+
 app.use(express.json());
 app.use('/api/users', userRoutes);
 app.use(express.static('./build'));
@@ -21,6 +22,6 @@ let server = app.listen(PORT, ()=>{
 });
 //@info server will be closed in case of any unhandledRejection
 process.on('unhandledRejection', error => {
-    console.log(error.message);
+    console.log('unhandledRejection',error.message);
     server.close(() => process.exit(1));
 });

@@ -13,6 +13,9 @@
   "dependencies": {
     "body-parser": "^1.19.1",
     "cors": "^2.8.5",
+    "crypto-price": "^0.0.6",
+    "cryptocurrency-unit-convert": "^1.2.8",
+    "currency-converter-lt": "^1.2.3",
     "express": "^4.17.2",
     "mongoose": "^6.1.7",
     "nodemon": "^2.0.15",
