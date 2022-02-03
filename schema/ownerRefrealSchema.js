@@ -2,14 +2,14 @@ const mongoose = require("mongoose");
 const {Schema} = require('mongoose');
 // const Refral = require("./refrealSchema")
 const OwnerrefrealSchema = mongoose.Schema({
-    ownerRefreal={
+    ownerRefreal:{
         type:String,
         required:true
 
     },
-    refreals = [{
+    TreeReferral : [{
         type:Schema.Types.ObjectId,
-        ref:"Refral",
+        ref:"TreeReferral",
         required:true
     }]
 });
